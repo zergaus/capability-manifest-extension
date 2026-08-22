@@ -12,6 +12,29 @@ This distinction matters:
 Ratified design contract != completed public implementation package
 ```
 
+## Evolution principle
+
+CME is **operational-fit first**.
+
+The standard is allowed to evolve because real adopters expose real missing requirements. The project does not optimize for abstract universality ahead of actual use.
+
+The expected evolution loop is:
+
+```text
+real adopter requirement
+→ capability/effect/availability modeling
+→ implementation experience
+→ cross-adopter comparison
+→ generalize only when useful
+→ versioned CME evolution
+```
+
+Public reuse is a benefit of a good working contract, not a requirement that primary adopters distort their architecture to satisfy hypothetical users.
+
+CME 1.0 remains stable while later versions may incorporate requirements proven by PM, TM, SB, RT, or other concrete adopters.
+
+See [`docs/rationale/OPERATIONAL_FIT_FIRST.md`](rationale/OPERATIONAL_FIT_FIRST.md).
+
 ## Locked 1.0 boundaries
 
 The following are treated as stable 1.0 design decisions unless a documented breaking revision supersedes them:
@@ -57,3 +80,5 @@ Changes to titles, descriptions, examples, and other display-only material may b
 Changes to Effects, scope kinds, target kinds, platform requirements, execution constraints, dynamic-resolution integrity rules, fingerprint inputs, or other authority-relevant semantics must be treated as normative changes and reviewed for compatibility.
 
 A change that materially broadens an existing capability's meaning cannot be shipped silently under the same capability ID.
+
+A generalization that is not motivated by real adopter needs should remain a proposal rather than becoming normative merely for theoretical completeness.
