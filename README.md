@@ -7,6 +7,16 @@
 > **License:** Apache-2.0  
 > **Official MCP status:** Third-party experimental extension; not an MCP Core standard.
 
+## Development philosophy
+
+CME is **operational-fit first**.
+
+The standard evolves from concrete requirements in systems that actually use it. Generality is introduced when it reduces real integration complexity or captures a pattern already proven across adopters.
+
+Public reuse is encouraged, but CME does not force its primary adopters to accept abstractions, transports, or capability models that make their real systems harder to build or operate merely to appear more universal.
+
+See [`docs/rationale/OPERATIONAL_FIT_FIRST.md`](docs/rationale/OPERATIONAL_FIT_FIRST.md).
+
 ## What CME does
 
 CME gives an MCP provider a machine-readable way to declare:
@@ -88,6 +98,7 @@ Before a stable external release, CME 1.0 requires migration to a reverse-domain
 | [`specification/1.0/CME_1.0_BLUEPRINT.md`](specification/1.0/CME_1.0_BLUEPRINT.md) | Ratified design history and normative 1.0 contract | Ratified |
 | [`docs/adoption/CME_1.0_MCP_ADOPTION_DIRECTIVE.md`](docs/adoption/CME_1.0_MCP_ADOPTION_DIRECTIVE.md) | Generic provider-adoption work order | Ratified companion directive |
 | [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) | Public repository maturity, boundaries, and next package work | Living document |
+| [`docs/rationale/OPERATIONAL_FIT_FIRST.md`](docs/rationale/OPERATIONAL_FIT_FIRST.md) | Adopter-first evolution rule | Active rationale |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contribution rules for normative and implementation changes | Active |
 
 ## Planned 1.0 package
