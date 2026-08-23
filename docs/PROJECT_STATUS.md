@@ -11,10 +11,14 @@ The current CME 2.0 candidate package is:
 ```text
 specification/2.0/CME_2.0_BLUEPRINT_E2E_DRAFT.md
 +
-specification/2.0/CME_2.0_RESPONSIBILITY_INTEROP_EXTENSION_v0.1.md
+specification/2.0/CME_2.0_RESPONSIBILITY_INTEROP_EXTENSION_v0.2.md
 +
 docs/requirements/CME_ECOSYSTEM_REQUIREMENT_MATRIX_v0.2.md
++
+docs/requirements/CME_TM_VALIDATION_REQUIREMENT_PATCH_v0.1.md
 ```
+
+`CME_2.0_RESPONSIBILITY_INTEROP_EXTENSION_v0.1.md` remains historical candidate provenance. v0.2 supersedes v0.1 only for overlapping Responsibility-role and Invocation-context terminology.
 
 The Responsibility & Interop extension is a pre-incorporation companion for the next cumulative CME 2.0 Blueprint revision. It does not modify ratified CME 1.0 and is not independently ratified authority.
 
@@ -38,7 +42,7 @@ CME 2.0 Core
 └─ Local Semantic Binding
 ```
 
-The current PM ↔ TM direct-interoperation review adds a second candidate requirement layer:
+The current PM ↔ TM direct-interoperation and TM REV7 validation review adds this candidate requirement layer:
 
 ```text
 Responsibility Domain
@@ -47,6 +51,20 @@ Invocation Context Requirements
 Delivery / Correlation / Idempotency Declaration
 Service-to-Service Dependency / Compatibility Declaration
 Semantic-fingerprint coverage for material interop semantics
+```
+
+The latest clarification is:
+
+```text
+responsibility role `authoritative`
+→ candidate role `semantic_owner`
+
+semantic ownership
+!= runtime mutation ownership / leader / lease / fencing authority
+
+Human-sensitive invocation
+→ may require human_presence_evidence_ref
+→ actual Human/evidence validation remains outside CME
 ```
 
 The intent is to make machine responsibility and safe cross-service invocation requirements explicit without moving Authority, trust, service discovery, workflow orchestration, AI judgment, or runtime recovery state machines into CME.
@@ -61,16 +79,19 @@ The following invariants are preserved:
 Capability != Authority
 Availability != Authorization
 Responsibility declaration != trust proof
+Semantic ownership != runtime mutation ownership
+Semantic ownership != leader/lease/fence authority
 Required authority context != authority validation
+Required Human-presence context != Human authentication
 Delivery declaration != runtime transaction ownership
 Dependency declaration != service discovery
 Gateway routing != downstream capability ownership
 Provider identity != authenticated principal
 ```
 
-CME may declare that an invocation requires `principal_ref`, `authority_context_ref`, correlation identity, or idempotency semantics.
+CME may declare that an invocation requires `principal_ref`, `authority_context_ref`, `human_presence_evidence_ref`, correlation identity, idempotency semantics, or another typed context reference.
 
-CME does not decide whether an authority reference is valid, whether a Human CEO granted it, whether an AI should invoke another AI, or whether a runtime should retry/reconcile a failed operation.
+CME does not decide whether those references are valid, whether a Human CEO granted authority, whether a Human-presence proof is fresh/one-shot, whether an AI should invoke another AI, or whether a runtime should retry/reconcile a failed operation.
 
 ## PM / TM responsibility direction
 
@@ -78,12 +99,14 @@ Current adopter mapping under review:
 
 ```text
 PM
-→ authoritative: chatgpt.project / chatgpt.conversation / chatgpt.logical_session / interop.binding
+→ semantic_owner: chatgpt.project / chatgpt.conversation / chatgpt.logical_session / interop.binding
 → gateway: interop.transport
+→ runtime provider-writer ownership remains PM-internal
 → does not own codex.thread / codex.work
 
 TM
-→ authoritative: codex.thread / codex.work / codex.execution / codex.runtime
+→ semantic_owner: codex.thread / codex.work / codex.execution / codex.runtime
+→ active Host/runtime ownership/fencing remains TM-internal
 → validates its own Authority/Capability/Ownership/Claim/Effect path outside CME
 ```
 
@@ -113,7 +136,7 @@ Expected loop:
 
 ```text
 real adopter requirement
-→ requirement matrix
+→ requirement matrix / bounded patch
 → candidate CME semantics
 → reverse adoption
 → implementation evidence
@@ -156,15 +179,17 @@ A stable public release requires an owner-controlled reverse-domain namespace. U
 
 ## Work remaining for CME 2.0 convergence
 
-1. Consolidate the Responsibility & Interop extension into the next cumulative CME 2.0 Blueprint revision.
-2. Reverse-apply Responsibility Domains and cross-service invocation requirements to PM and TM.
-3. Verify that a simple non-gateway provider is not distorted by optional interop fields.
-4. Verify that an existing dynamic MCP provider preserves natural CME semantics.
-5. Define the exact 2.0 machine-readable shape and canonical hashing inputs for Responsibility/Interop fields.
-6. Specify Local Semantic Binding discovery/metadata representation without creating a universal RPC framework.
-7. Produce 1.0→2.0 migration/equivalence rules.
-8. Add conformance cases for non-transitive responsibility, context requirements, ambiguous delivery, idempotency, reconciliation, and dependency compatibility.
-9. Independently review the ESHIC/Trust/Authority boundaries before ratification.
+1. Consolidate Responsibility & Interop Extension v0.2 into the next cumulative CME 2.0 Blueprint revision.
+2. Reverse-apply `semantic_owner` Responsibility Domains and cross-service invocation requirements to PM and TM.
+3. Verify that semantic ownership cannot be confused with PM provider writer ownership or TM active Host/fencing ownership.
+4. Verify `human_presence_evidence_ref` with a Human-sensitive TM invocation without importing Human authentication into CME.
+5. Verify that a simple non-gateway provider is not distorted by optional interop fields.
+6. Verify that an existing dynamic MCP provider preserves natural CME semantics.
+7. Define the exact 2.0 machine-readable shape and canonical hashing inputs for Responsibility/Interop fields.
+8. Specify Local Semantic Binding discovery/metadata representation without creating a universal RPC framework.
+9. Produce 1.0→2.0 migration/equivalence rules and normalize the pre-ratification `authoritative → semantic_owner` candidate token transition.
+10. Add conformance cases for non-transitive responsibility, context requirements, semantic-owner/runtime-owner separation, Human-presence context, ambiguous delivery, idempotency, reconciliation, and dependency compatibility.
+11. Independently review ESHIC/Trust/Authority boundaries before ratification.
 
 ## Work remaining for a complete CME 1.0 public package
 
